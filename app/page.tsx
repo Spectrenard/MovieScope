@@ -24,10 +24,8 @@ async function MovieSection({
 }
 
 async function Home() {
-  const [trending, nowPlaying, upcoming, topRated] = await Promise.all([
+  const [trending, topRated] = await Promise.all([
     movieService.getTrending(),
-    movieService.getNowPlaying(),
-    movieService.getUpcoming(),
     movieService.getTopRated(),
   ]);
 
@@ -39,7 +37,6 @@ async function Home() {
       {/* Sections de films */}
       <div className="container mx-auto px-4 py-12">
         <MovieSection title="Films Tendances" movies={trending.results} />
-        <MovieSection title="À l'affiche" movies={nowPlaying.results} />
         <MovieSection title="Les mieux notés" movies={topRated.results} />
       </div>
     </main>

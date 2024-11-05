@@ -17,7 +17,7 @@ export default function Logo() {
       <h1 className="text-2xl font-bold">
         <span className="text-white tracking-widest">MOVIE</span>
         <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text tracking-widest ml-1">
-          PULSE
+          SCOPE
         </span>
       </h1>
     </motion.div>
