@@ -23,12 +23,12 @@ export default async function MovieDetail({
   return (
     <main className="min-h-screen bg-[#121212]">
       {/* Hero Section avec backdrop */}
-      <div className="relative h-[50vh] sm:h-[70vh]">
+      <div className="relative h-[40vh] sm:h-[70vh]">
         <Image
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
           fill
-          className="object-cover"
+          className="object-cover "
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/80 to-transparent" />
@@ -39,7 +39,7 @@ export default async function MovieDetail({
         <div className="flex flex-col lg:flex-row gap-6 sm:gap-12">
           {/* Colonne de gauche - Poster et Infos rapides */}
           <div className="w-full lg:w-1/3 mb-6 sm:mb-8">
-            <div className="group relative rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
+            <div className="group relative rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300 max-md:max-w-[250px] mx-auto">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}

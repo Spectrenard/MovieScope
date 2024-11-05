@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import MovieCard from "./MovieCard";
 import { Movie } from "../types/movie";
@@ -15,26 +15,11 @@ export default function MovieSection({
   categorySlug?: string;
 }) {
   const router = useRouter();
-  const [isMobile, setIsMobile] = useState(false);
-  const initialLimit = isMobile ? 6 : 8;
+  const initialLimit = 8;
   const [limit, setLimit] = useState(initialLimit);
 
-  // Détection du mobile
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 640);
-      setLimit(window.innerWidth < 640 ? 6 : 8);
-    };
-
-    checkIsMobile();
-    window.addEventListener("resize", checkIsMobile);
-
-    return () => window.removeEventListener("resize", checkIsMobile);
-  }, []);
-
   const showMore = () => {
-    const increment = isMobile ? 6 : 8;
-    setLimit(Math.min(limit + increment, movies.length));
+    setLimit(Math.min(limit + 8, movies.length));
   };
 
   const navigateToTopRated = () => {
