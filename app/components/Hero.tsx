@@ -33,7 +33,7 @@ export default function Hero({ movies }: { movies: Movie[] }) {
   const currentMovie = movies[currentIndex];
 
   return (
-    <section className="relative h-[90vh] flex items-center overflow-hidden bg-[#0A0A0A]">
+    <section className="relative h-[80vh] md:h-[90vh] flex items-center overflow-hidden bg-[#0A0A0A]">
       <div className="absolute inset-0">
         <Image
           src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
@@ -45,56 +45,56 @@ export default function Hero({ movies }: { movies: Movie[] }) {
           priority
         />
 
-        {/* Overlays ajustés */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent md:via-[#0A0A0A]/70" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/60" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="max-w-4xl"
         >
-          <div className="mb-6 flex items-center gap-3">
-            <div className="h-[2px] w-12 bg-gradient-to-r from-red-700 via-red-500 to-white" />
-            <span className="text-red-500 font-medium tracking-wider text-sm">
+          <div className="mb-4 md:mb-6 flex items-center gap-2 md:gap-3">
+            <div className="h-[2px] w-8 md:w-12 bg-gradient-to-r from-red-700 via-red-500 to-white" />
+            <span className="text-red-500 font-medium tracking-wider text-xs md:text-sm">
               PLUS JAMAIS À COURT D'IDÉES
             </span>
           </div>
 
-          <h1 className="text-7xl font-black mb-8 leading-none tracking-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black mb-4 md:mb-8 leading-tight md:leading-none tracking-tight">
             <span className="bg-gradient-to-r from-white via-white to-white/70 text-transparent bg-clip-text">
               Le film parfait pour votre soirée en quelques clics
             </span>
           </h1>
 
-          <p className="text-xl text-gray-300/90 max-w-2xl mb-12 leading-relaxed">
+          <p className="text-base md:text-xl text-gray-300/90 max-w-2xl mb-8 md:mb-12 leading-relaxed">
             Action, comédie, drame ou science-fiction ? Découvrez des films qui
             correspondent à vos envies du moment.
           </p>
 
-          <div className="flex gap-6 items-center">
-            <Link href="/genres">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 items-stretch sm:items-center">
+            <Link href="/genres" className="flex-1 sm:flex-initial">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="group relative inline-flex items-center gap-3 bg-white/5 backdrop-blur-sm px-8 py-4 rounded-lg overflow-hidden"
+                className="w-full group relative inline-flex items-center justify-center gap-3 bg-white/5 backdrop-blur-sm px-6 md:px-8 py-3 md:py-4 rounded-lg overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <BsPlayCircleFill className="w-5 h-5 relative z-10" />
-                <span className="relative z-10 font-medium">
+                <BsPlayCircleFill className="w-4 h-4 md:w-5 md:h-5 relative z-10" />
+                <span className="relative z-10 font-medium text-sm md:text-base">
                   Trouver mon film
                 </span>
               </motion.button>
             </Link>
 
-            <Link href="/top-rated">
+            <Link href="/top-rated" className="flex-1 sm:flex-initial">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 rounded-lg text-white font-medium border border-white/10 hover:bg-white/5 hover:border-red-500/20 transition-colors backdrop-blur-sm"
+                className="w-full px-6 md:px-8 py-3 md:py-4 rounded-lg text-white font-medium text-sm md:text-base 
+                border border-white/10 hover:bg-white/5 hover:border-red-500/20 transition-colors backdrop-blur-sm"
               >
                 Films les mieux notés
               </motion.button>
