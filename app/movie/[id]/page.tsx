@@ -23,7 +23,7 @@ export default async function MovieDetail({
   return (
     <main className="min-h-screen bg-[#121212]">
       {/* Hero Section avec backdrop */}
-      <div className="relative h-[70vh]">
+      <div className="relative h-[50vh] sm:h-[70vh]">
         <Image
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
@@ -35,10 +35,10 @@ export default async function MovieDetail({
       </div>
 
       {/* Contenu Principal */}
-      <div className="container mx-auto px-4 -mt-64 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-12">
+      <div className="container mx-auto px-4 -mt-32 sm:-mt-64 relative z-10">
+        <div className="flex flex-col lg:flex-row gap-6 sm:gap-12">
           {/* Colonne de gauche - Poster et Infos rapides */}
-          <div className="lg:w-1/3 mb-8">
+          <div className="w-full lg:w-1/3 mb-6 sm:mb-8">
             <div className="group relative rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -90,9 +90,9 @@ export default async function MovieDetail({
           </div>
 
           {/* Colonne de droite - Détails */}
-          <div className="lg:w-2/3 space-y-8">
+          <div className="w-full lg:w-2/3 space-y-6 sm:space-y-8">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
                 {movie.title}
               </h1>
               <div className="flex flex-wrap gap-3 mb-6">
@@ -135,11 +135,11 @@ export default async function MovieDetail({
             </div>
 
             {/* Distribution */}
-            <div>
-              <h2 className="text-2xl font-semibold mb-6">
+            <div className="py-9">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
                 Distribution principale
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                 {credits.cast?.slice(0, 8).map((actor: any) => (
                   <div
                     key={actor.id}
