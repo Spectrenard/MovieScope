@@ -32,6 +32,6 @@ export const movieService = {
   getTopRated: () => fetchFromTMDB("/movie/top_rated"),
   getMovieDetails: (id: string) => fetchFromTMDB(`/movie/${id}`),
   searchMovies: (query: string) =>
-    fetchFromTMDB(`/search/movie&query=${encodeURIComponent(query)}`),
+    fetchFromTMDB(`/search/movie?query=${encodeURIComponent(query)}`),
   getMovieCredits: (id: string) => fetchFromTMDB(`/movie/${id}/credits`),
 };

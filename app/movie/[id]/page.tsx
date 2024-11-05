@@ -38,7 +38,7 @@ export default async function MovieDetail({
       <div className="container mx-auto px-4 -mt-64 relative z-10">
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Colonne de gauche - Poster et Infos rapides */}
-          <div className="lg:w-1/3">
+          <div className="lg:w-1/3 mb-8">
             <div className="group relative rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -76,33 +76,14 @@ export default async function MovieDetail({
                 <div className="space-y-3">
                   <InfoItem
                     icon={<FiDollarSign />}
-                    label="Budget"
+                    label="Coût de production"
                     value={formatBudget(movie.budget)}
                   />
                   <InfoItem
                     icon={<FiDollarSign />}
-                    label="Recettes"
+                    label="Gains en salles"
                     value={formatBudget(movie.revenue)}
                   />
-                  {movie.budget && movie.revenue && (
-                    <div className="text-sm">
-                      <span
-                        className={`${
-                          movie.revenue > movie.budget
-                            ? "text-green-400"
-                            : "text-red-400"
-                        }`}
-                      >
-                        {movie.revenue > movie.budget
-                          ? `Bénéfice: ${formatBudget(
-                              movie.revenue - movie.budget
-                            )}`
-                          : `Perte: ${formatBudget(
-                              movie.budget - movie.revenue
-                            )}`}
-                      </span>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
