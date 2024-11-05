@@ -42,7 +42,7 @@ export default function MovieSection({
         {movies.slice(0, limit).map((movie) => (
           <div
             key={movie.id}
-            className="transform hover:scale-105 transition-transform duration-300"
+            className="transform hover:scale-[1.05] md:hover:scale-105 transition-transform duration-300"
           >
             <MovieCard movie={movie} />
           </div>

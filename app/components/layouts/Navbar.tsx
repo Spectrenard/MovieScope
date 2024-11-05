@@ -112,7 +112,7 @@ export default function Navbar() {
           {/* Footer */}
           <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/5">
             <div className="flex items-center justify-between text-sm text-white/60">
-              <span>© 2024 Spectre</span>
+              <span>© 2024 MovieScope.</span>
               <button
                 onClick={() => setIsMenuOpen(false)}
                 className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 active:bg-white/20 transition-colors"
