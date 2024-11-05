@@ -14,7 +14,7 @@ async function MovieSection({
   return (
     <section className="relative mb-12 md:mb-24">
       <div className="relative mb-6 md:mb-12">
-        <div className="absolute left-0 -top-3 md:-top-4 w-16 md:w-24 h-0.5 md:h-1 bg-gradient-to-r from-red-700 via-red-500 to-white"></div>
+        <div className="absolute left-0  md:-top-4 w-16 md:w-24 h-0.5 md:h-1 bg-gradient-to-r from-red-700 via-red-500 to-white"></div>
 
         <h2 className="text-2xl md:text-4xl font-extrabold text-white pt-2">
           {title}
@@ -24,7 +24,7 @@ async function MovieSection({
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 px-2 sm:px-0">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
         {movies.map((movie) => (
           <div
             key={movie.id}
