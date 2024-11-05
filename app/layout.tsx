@@ -1,4 +1,5 @@
-import Navbar from "./components/Navbar";
+import Navbar from "./components/layouts/Navbar";
+import Footer from "./components/layouts/Footer";
 import "./globals.css";
 
 export default function RootLayout({
@@ -15,6 +16,7 @@ export default function RootLayout({
           {/* Espace pour la navbar fixe */}
           {children}
         </div>
+        <Footer />
       </body>
     </html>
   );
