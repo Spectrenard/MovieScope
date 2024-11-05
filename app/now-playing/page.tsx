@@ -1,18 +1,40 @@
 import MovieSection from "../components/MovieSection";
 import { movieService } from "../services/tmdb";
+import { Movie } from "../types/movie";
 
 export const revalidate = 3600; // Revalidation toutes les heures
 
 export default async function NowPlaying() {
-  const data = await movieService.getNowPlaying();
+  // Récupérer les films sans paramètre de page
+  const pages = await Promise.all([
+    movieService.getNowPlaying(),
+    movieService.getNowPlaying(),
+    movieService.getNowPlaying(),
+  ]);
+
+  // Filtrer les doublons en utilisant un Map
+  const uniqueMovies = Array.from(
+    new Map(
+      pages.flatMap((page) => page.results).map((movie) => [movie.id, movie])
+    ).values()
+  );
 
   return (
-    <main className="min-h-screen bg-[#121212] pt-24">
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold text-white mb-8">
-          Films à l'affiche
-        </h1>
-        <MovieSection movies={data.results} />
+    <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-black">
+      <div className="container mx-auto py-32 px-6 max-w-[1600px]">
+        <div className="relative backdrop-blur-xl bg-white/[0.02] rounded-3xl p-16 shadow-2xl">
+          <div className="relative mb-16">
+            <div className="absolute left-0 -top-4 w-32 h-0.5 bg-gradient-to-r from-blue-500/50 to-purple-500/50"></div>
+            <h1 className="text-4xl font-bold text-white">
+              Films à l'affiche
+              <span className="block mt-3 text-base font-normal text-gray-400">
+                Découvrez les films actuellement au cinéma
+              </span>
+            </h1>
+          </div>
+
+          <MovieSection title="" movies={uniqueMovies} />
+        </div>
       </div>
     </main>
   );
