@@ -69,16 +69,14 @@ export default function SearchBar({ onSearchResults }: SearchBarProps) {
   }, [query, onSearchResults]);
 
   return (
-    <div className="relative w-[300px]" ref={searchRef}>
-      <div className="flex items-center bg-white/10 rounded-lg px-3 py-2">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Rechercher un film..."
-          className="bg-transparent border-none outline-none px-3 py-1 w-full text-white/90 placeholder:text-white/50"
-        />
-      </div>
+    <div className="w-full relative">
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Rechercher un film..."
+        className="w-full px-4 py-2 bg-white/10 rounded-lg"
+      />
 
       {error && (
         <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-red-500/10 text-red-300 rounded-lg">
