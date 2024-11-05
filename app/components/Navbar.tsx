@@ -7,16 +7,21 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 h-20 bg-black/95 backdrop-blur-lg z-50 border-b border-white/5">
       <div className="h-full max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <div className="flex items-center gap-16">
-          <Link href="/" className="hover:scale-105 transition-transform">
+        <div className="flex items-center gap-8 lg:gap-16">
+          <Link
+            href="/"
+            className="hover:scale-105 transition-transform duration-200"
+          >
             <Logo />
           </Link>
 
-          <SearchBar />
+          <div className="hidden md:block flex-1 max-w-xl">
+            <SearchBar />
+          </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 lg:gap-2">
             <NavLink href="/now-playing" icon={<BiTime size={20} />}>
-              À l'affiche
+              À l&apos;affiche
             </NavLink>
             <NavLink href="/top-rated" icon={<BiStar size={20} />}>
               Top
@@ -43,12 +48,12 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="group flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-white/5 transition-all duration-200"
+      className="group flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-lg hover:bg-white/10 active:bg-white/15 transition-all duration-200"
     >
       <span className="text-white/70 group-hover:text-white transition-colors">
         {icon}
       </span>
-      <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+      <span className="hidden sm:block text-sm font-medium text-white/70 group-hover:text-white transition-colors">
         {children}
       </span>
     </Link>
