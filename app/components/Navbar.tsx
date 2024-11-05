@@ -105,7 +105,7 @@ export default function Navbar() {
           {/* Pied du menu */}
           <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
             <div className="flex items-center justify-between text-sm text-white/60">
-              <span>© 2024 MovieApp</span>
+              <span>© 2024 Spectre</span>
               <button
                 onClick={() => setIsMenuOpen(false)}
                 className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"

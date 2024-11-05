@@ -75,7 +75,7 @@ export default function SearchBar({ onSearchResults }: SearchBarProps) {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Rechercher un film..."
-        className="w-full px-4 py-2 bg-white/10 rounded-lg"
+        className="w-full px-4 py-2 bg-white/10 rounded-lg focus:ring-1 focus:ring-white/30 outline-none"
       />
 
       {error && (
