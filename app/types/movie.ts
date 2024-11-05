@@ -6,6 +6,7 @@ export interface Movie {
   overview: string;
   vote_average: number;
   genre_ids: number[];
+  backdrop_path: string;
 }
 
 export interface MovieResponse {
