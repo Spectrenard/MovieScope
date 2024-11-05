@@ -58,20 +58,25 @@ export default async function GenresPage() {
               >
                 <div
                   className="bg-white/[0.03] backdrop-blur-lg rounded-lg md:rounded-xl p-4 sm:p-6 md:p-8 
-                  hover:bg-white/[0.09] transition-all duration-300 
-                  hover:shadow-xl hover:shadow-white/15 hover:-translate-y-1"
+                  transition-all duration-300 ease-out
+                  group-hover:bg-gradient-to-br from-white/[0.07] to-white/[0.03]
+                  group-hover:shadow-lg group-hover:shadow-white/5
+                  border border-transparent group-hover:border-white/10"
                 >
                   <div className="flex items-center gap-3 sm:gap-4">
                     {/* Icône */}
-                    <span className="text-2xl sm:text-3xl md:text-4xl">
+                    <span
+                      className="text-2xl sm:text-3xl md:text-4xl 
+                      transition-transform duration-300 group-hover:scale-110"
+                    >
                       {genreIcons[genre.name] || "🎥"}
                     </span>
 
                     {/* Textes */}
                     <div>
                       <h2
-                        className="text-base sm:text-lg md:text-xl font-medium text-white/90 
-                        group-hover:text-white transition-colors"
+                        className="text-base sm:text-lg md:text-xl font-medium 
+                        text-white/90 group-hover:text-white transition-colors"
                       >
                         {genre.name}
                       </h2>
