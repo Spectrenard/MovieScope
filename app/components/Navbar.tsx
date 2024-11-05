@@ -86,13 +86,25 @@ export default function Navbar() {
 
           {/* Menu principal */}
           <div className="py-2">
-            <MobileNavLink href="/now-playing" icon={<BiTime size={22} />}>
+            <MobileNavLink
+              href="/now-playing"
+              icon={<BiTime size={22} />}
+              setIsMenuOpen={setIsMenuOpen}
+            >
               À l&apos;affiche
             </MobileNavLink>
-            <MobileNavLink href="/top-rated" icon={<BiStar size={22} />}>
+            <MobileNavLink
+              href="/top-rated"
+              icon={<BiStar size={22} />}
+              setIsMenuOpen={setIsMenuOpen}
+            >
               Top Films
             </MobileNavLink>
-            <MobileNavLink href="/genres" icon={<BiCategory size={22} />}>
+            <MobileNavLink
+              href="/genres"
+              icon={<BiCategory size={22} />}
+              setIsMenuOpen={setIsMenuOpen}
+            >
               Genres
             </MobileNavLink>
           </div>
@@ -141,14 +153,17 @@ function MobileNavLink({
   href,
   children,
   icon,
+  setIsMenuOpen,
 }: {
   href: string;
   children: React.ReactNode;
   icon: React.ReactNode;
+  setIsMenuOpen: (value: boolean) => void;
 }) {
   return (
     <Link
       href={href}
+      onClick={() => setIsMenuOpen(false)}
       className="flex items-center gap-3 px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 active:bg-white/10 transition-all duration-200"
     >
       <span className="text-white/60">{icon}</span>
