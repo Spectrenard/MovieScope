@@ -43,4 +43,9 @@ export const movieService = {
   searchMovies: (query: string) =>
     fetchFromTMDB(`/search/movie?query=${encodeURIComponent(query)}`),
   getMovieCredits: (id: string) => fetchFromTMDB(`/movie/${id}/credits`),
+  getGenres: () => fetchFromTMDB("/genre/movie/list"),
+  getMoviesByGenre: (genreId: string, page: number = 1) =>
+    fetchFromTMDB(
+      `/discover/movie?with_genres=${genreId}&sort_by=vote_average.desc&vote_count.gte=100&page=${page}`
+    ),
 };
