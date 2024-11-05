@@ -80,7 +80,7 @@ export default function Navbar() {
           {/* En-tête du menu avec SearchBar */}
           <div className="p-4 border-b border-white/10 w-full">
             <div className="w-full">
-              <SearchBar />
+              <SearchBar onSuggestionClick={() => setIsMenuOpen(false)} />
             </div>
           </div>
 

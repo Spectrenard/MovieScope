@@ -9,9 +9,13 @@ import { movieService } from "@/services/tmdb";
 
 interface SearchBarProps {
   onSearchResults?: (results: Movie[]) => void;
+  onSuggestionClick?: () => void;
 }
 
-export default function SearchBar({ onSearchResults }: SearchBarProps) {
+export default function SearchBar({
+  onSearchResults,
+  onSuggestionClick,
+}: SearchBarProps) {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -94,6 +98,7 @@ export default function SearchBar({ onSearchResults }: SearchBarProps) {
               onClick={() => {
                 setShowSuggestions(false);
                 setQuery("");
+                onSuggestionClick?.();
               }}
             >
               {movie.poster_path ? (
