@@ -7,7 +7,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
     <Link href={`/movie/${movie.id}`}>
       <div className="relative group transition-smooth">
         {/* Container principal */}
-        <div className="bg-[#1e1e1e] rounded-xl overflow-hidden transition-smooth hover:scale-[1.02] hover:shadow-xl hover:shadow-indigo-500/10">
+        <div className="bg-[#1e1e1e] rounded-xl overflow-hidden transition-smooth hover:scale-[1.02]">
           {/* Image */}
           <div className="relative aspect-[2/3]">
             <Image
