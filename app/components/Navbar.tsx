@@ -15,7 +15,6 @@ import { useState, useEffect } from "react";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Empêcher le défilement quand le menu est ouvert
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -26,7 +25,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 h-16 md:h-24 bg-gradient-to-r from-black/95 to-zinc-900/95 backdrop-blur-lg z-50">
+      <nav className="fixed top-0 left-0 right-0 h-16 md:h-20 bg-black/90 backdrop-blur-lg border-b border-white/5 z-50">
         <div className="h-full max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
           {/* Logo */}
           <Link
@@ -42,14 +41,14 @@ export default function Navbar() {
           </div>
 
           {/* Navigation desktop */}
-          <div className="hidden md:flex items-center gap-3 lg:gap-4">
-            <NavLink href="/now-playing" icon={<BiTime size={22} />}>
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+            <NavLink href="/now-playing" icon={<BiTime size={20} />}>
               À l&apos;affiche
             </NavLink>
-            <NavLink href="/top-rated" icon={<BiStar size={22} />}>
+            <NavLink href="/top-rated" icon={<BiStar size={20} />}>
               Top
             </NavLink>
-            <NavLink href="/genres" icon={<BiCategory size={22} />}>
+            <NavLink href="/genres" icon={<BiCategory size={20} />}>
               Genres
             </NavLink>
           </div>
@@ -57,23 +56,23 @@ export default function Navbar() {
           {/* Bouton menu hamburger */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-white/80 hover:text-white"
+            className="md:hidden rounded-full p-2 hover:bg-white/10 active:bg-white/20 transition-colors duration-200"
             aria-label="Menu"
           >
-            {isMenuOpen ? <BiX size={28} /> : <BiMenu size={28} />}
+            {isMenuOpen ? <BiX size={24} /> : <BiMenu size={24} />}
           </button>
         </div>
       </nav>
 
       {/* Menu mobile */}
       <div
-        className={`fixed top-16 inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/80 backdrop-blur-md z-40 md:hidden transition-all duration-300 ${
           isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsMenuOpen(false)}
       >
         <div
-          className={`fixed right-0 top-0 bottom-0 w-[300px] bg-zinc-900 shadow-xl transition-transform duration-300 ease-out overflow-hidden ${
+          className={`fixed right-0 top-16 bottom-0 w-72 bg-zinc-900/95 shadow-2xl transition-transform duration-300 ease-out ${
             isMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
           onClick={(e) => e.stopPropagation()}
@@ -85,30 +84,26 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Corps du menu */}
-          <div className="py-4">
-            <div className="px-4 py-2 text-sm text-white/60 uppercase">
-              Menu
-            </div>
-
-            <MobileNavLink href="/now-playing" icon={<BiTime size={24} />}>
+          {/* Menu principal */}
+          <div className="py-2">
+            <MobileNavLink href="/now-playing" icon={<BiTime size={22} />}>
               À l&apos;affiche
             </MobileNavLink>
-            <MobileNavLink href="/top-rated" icon={<BiStar size={24} />}>
+            <MobileNavLink href="/top-rated" icon={<BiStar size={22} />}>
               Top Films
             </MobileNavLink>
-            <MobileNavLink href="/genres" icon={<BiCategory size={24} />}>
+            <MobileNavLink href="/genres" icon={<BiCategory size={22} />}>
               Genres
             </MobileNavLink>
           </div>
 
-          {/* Pied du menu */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
+          {/* Footer */}
+          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/5">
             <div className="flex items-center justify-between text-sm text-white/60">
               <span>© 2024 Spectre</span>
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 active:bg-white/20 transition-colors"
               >
                 Fermer
               </button>
@@ -120,7 +115,6 @@ export default function Navbar() {
   );
 }
 
-// NavLink pour desktop
 function NavLink({
   href,
   children,
@@ -133,20 +127,16 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="group relative flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-white/5 active:bg-white/10 transition-all duration-300"
+      className="group flex items-center gap-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200"
     >
-      <span className="text-white/80 group-hover:text-white transition-colors duration-300 ease-out">
+      <span className="text-white/60 group-hover:text-white transition-colors duration-200">
         {icon}
       </span>
-      <span className="text-sm font-medium text-white/80 group-hover:text-white transition-colors duration-300 ease-out">
-        {children}
-      </span>
-      <span className="absolute bottom-1 left-0 w-0 h-0.5 bg-white/50 group-hover:w-full transition-all duration-300 ease-out" />
+      <span>{children}</span>
     </Link>
   );
 }
 
-// Composant MobileNavLink amélioré
 function MobileNavLink({
   href,
   children,
@@ -159,7 +149,7 @@ function MobileNavLink({
   return (
     <Link
       href={href}
-      className="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 active:bg-white/20 transition-all duration-200"
+      className="flex items-center gap-3 px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 active:bg-white/10 transition-all duration-200"
     >
       <span className="text-white/60">{icon}</span>
       <span className="font-medium">{children}</span>
