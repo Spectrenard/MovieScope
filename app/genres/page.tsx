@@ -28,14 +28,14 @@ export default async function GenresPage() {
   const { genres } = await movieService.getGenres();
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-black">
-      <div className="container mx-auto py-32 px-6 max-w-[1600px]">
-        <div className="relative backdrop-blur-xl bg-white/[0.02] rounded-3xl p-16 shadow-2xl">
+    <main className="min-h-screen bg-[#0a0a0a]">
+      <div className="container mx-auto py-24 max-w-[1400px]">
+        <div className="relative backdrop-blur-3xl bg-white/5 rounded-3xl p-12 shadow-2xl">
           <div className="relative mb-16">
-            <div className="absolute left-0 -top-4 w-32 h-0.5 bg-gradient-to-r from-blue-500/50 to-purple-500/50"></div>
-            <h1 className="text-4xl font-bold text-white">
+            <div className="absolute left-0 -top-4 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+            <h1 className="text-4xl font-extrabold text-white">
               Explorer par Genre
-              <span className="block mt-3 text-base font-normal text-gray-400">
+              <span className="block mt-2 text-sm font-normal text-gray-400">
                 Découvrez tous les genres de films
               </span>
             </h1>
