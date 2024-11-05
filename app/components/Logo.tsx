@@ -2,24 +2,45 @@
 
 import { motion } from "framer-motion";
 import { RiMovie2Line } from "react-icons/ri";
+import { PiPopcornBold } from "react-icons/pi";
 
 export default function Logo() {
   return (
-    <motion.div
-      className="flex items-center gap-3"
-      whileHover={{ scale: 1.02 }}
-    >
-      <div className="relative">
-        <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full blur opacity-40 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
-        <RiMovie2Line className="w-10 h-10 relative text-white transform rotate-12" />
-      </div>
+    <div className="flex items-center gap-2.5 select-none">
+      <motion.div
+        className="relative"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <PiPopcornBold className="w-8 h-8 text-white" />
+        <div className="absolute inset-0 bg-amber-100/30 blur-xl rounded-full animate-pulse" />
+      </motion.div>
 
-      <h1 className="text-2xl font-bold">
-        <span className="text-white tracking-widest">MOVIE</span>
-        <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text tracking-widest ml-1">
-          SCOPE
+      <motion.div
+        className="flex items-baseline"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <span className="text-3xl font-black leading-none tracking-tight">
+          <span className="bg-gradient-to-r from-red-500 via-red-400 to-white bg-clip-text text-transparent">
+            Movie
+          </span>
+          <span className="bg-gradient-to-r from-white to-gray-100 bg-clip-text text-transparent">
+            Scope
+          </span>
         </span>
-      </h1>
-    </motion.div>
+
+        <span
+          className="ml-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full 
+          bg-gradient-to-r from-red-500/20 to-red-900/20 
+          text-red-400 border border-red-500/30 
+          hover:from-red-500/30 hover:to-red-900/30 hover:text-red-300
+          transition-all duration-300"
+        >
+          beta
+        </span>
+      </motion.div>
+    </div>
   );
 }

@@ -13,7 +13,7 @@ async function MovieSection({
 }) {
   return (
     <section className="relative mb-24 px-4">
-      <div className="absolute left-0 -top-4 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+      <div className="absolute left-0 -top-4 w-24 h-1 bg-gradient-to-r from-red-700 via-red-500 to-white"></div>
 
       <h2 className="text-4xl font-extrabold mb-12 text-white">
         {title}

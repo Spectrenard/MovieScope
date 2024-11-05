@@ -40,15 +40,14 @@ export default function Hero({ movies }: { movies: Movie[] }) {
           alt="Film backdrop"
           fill
           className={`object-cover transition-opacity duration-1000 ${
-            isTransitioning ? "opacity-0" : "opacity-50"
+            isTransitioning ? "opacity-0" : "opacity-90"
           } scale-105`}
           priority
         />
 
-        {/* Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/90 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/80" />
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.02] mix-blend-overlay" />
+        {/* Overlays ajustés */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/60" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -59,8 +58,8 @@ export default function Hero({ movies }: { movies: Movie[] }) {
           className="max-w-4xl"
         >
           <div className="mb-6 flex items-center gap-3">
-            <div className="h-[2px] w-12 bg-gradient-to-r from-indigo-500 to-pink-500" />
-            <span className="text-indigo-400 font-medium tracking-wider text-sm">
+            <div className="h-[2px] w-12 bg-gradient-to-r from-red-700 via-red-500 to-white" />
+            <span className="text-red-500 font-medium tracking-wider text-sm">
               PLUS JAMAIS À COURT D'IDÉES
             </span>
           </div>
@@ -83,7 +82,7 @@ export default function Hero({ movies }: { movies: Movie[] }) {
                 whileTap={{ scale: 0.98 }}
                 className="group relative inline-flex items-center gap-3 bg-white/5 backdrop-blur-sm px-8 py-4 rounded-lg overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <BsPlayCircleFill className="w-5 h-5 relative z-10" />
                 <span className="relative z-10 font-medium">
                   Trouver mon film
@@ -95,7 +94,7 @@ export default function Hero({ movies }: { movies: Movie[] }) {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 rounded-lg text-white font-medium border border-white/10 hover:bg-white/5 transition-colors backdrop-blur-sm"
+                className="px-8 py-4 rounded-lg text-white font-medium border border-white/10 hover:bg-white/5 hover:border-red-500/20 transition-colors backdrop-blur-sm"
               >
                 Films les mieux notés
               </motion.button>
