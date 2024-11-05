@@ -38,7 +38,8 @@ export const movieService = {
   getTrending: () => fetchFromTMDB("/trending/movie/week"),
   getNowPlaying: () => fetchFromTMDB("/movie/now_playing"),
   getUpcoming: () => fetchFromTMDB("/movie/upcoming"),
-  getTopRated: () => fetchFromTMDB("/movie/top_rated"),
+  getTopRated: (page: number = 1) =>
+    fetchFromTMDB(`/movie/top_rated?page=${page}`),
   getMovieDetails: (id: string) => fetchFromTMDB(`/movie/${id}`),
   searchMovies: (query: string) =>
     fetchFromTMDB(`/search/movie?query=${encodeURIComponent(query)}`),

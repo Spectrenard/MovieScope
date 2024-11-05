@@ -15,8 +15,8 @@ export default function Navbar() {
           <SearchBar />
 
           <div className="flex items-center gap-2">
-            <NavLink href="/movies" icon={<BiMovie size={20} />}>
-              Films
+            <NavLink href="/now-playing" icon={<BiTime size={20} />}>
+              À l'affiche
             </NavLink>
             <NavLink href="/top-rated" icon={<BiStar size={20} />}>
               Top
