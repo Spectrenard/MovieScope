@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
+import SearchBar from "./SearchBar";
 import { BiMovie, BiTime, BiStar, BiCategory } from "react-icons/bi";
 
 export default function Navbar() {
@@ -10,6 +11,8 @@ export default function Navbar() {
           <Link href="/" className="hover:scale-105 transition-transform">
             <Logo />
           </Link>
+
+          <SearchBar />
 
           <div className="flex items-center gap-2">
             <NavLink href="/movies" icon={<BiMovie size={20} />}>

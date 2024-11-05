@@ -1,5 +1,5 @@
 const BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = process.env.TMDB_API_KEY;
+const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
 export const getTrendingMovies = async () => {
   const response = await fetch(
@@ -16,13 +16,22 @@ export const getMovieDetails = async (movieId: string) => {
 };
 
 export async function fetchFromTMDB(endpoint: string) {
-  const response = await fetch(
-    `${BASE_URL}${endpoint}?api_key=${API_KEY}&language=fr-FR`
-  );
-  if (!response.ok) {
+  try {
+    const separator = endpoint.includes("?") ? "&" : "?";
+
+    const response = await fetch(
+      `${BASE_URL}${endpoint}${separator}api_key=${API_KEY}&language=fr-FR`
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Erreur TMDB:", error);
     throw new Error("Erreur lors de la récupération des données");
   }
-  return response.json();
 }
 
 export const movieService = {
