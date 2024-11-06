@@ -13,13 +13,12 @@ interface PageProps {
 }
 
 export default async function GenreMoviesPage({
-  params,
+  params: { id },
   searchParams,
 }: PageProps) {
-  const currentPage = Number(searchParams.page) || 1;
-  const genreId = params.id;
+  const currentPage = Number(searchParams?.page) || 1;
+  const genreId = id; // Utiliser directement l'id depuis la déstructuration
 
-  // Récupérer les films du genre
   const movies = await movieService.getMoviesByGenre(genreId, currentPage);
   const genre = await movieService.getGenreById(genreId);
 
@@ -61,7 +60,7 @@ export default async function GenreMoviesPage({
             <Pagination2
               currentPage={currentPage}
               totalPages={Math.min(movies.total_pages, 500)}
-              baseUrl={`/genres/${params.id}`}
+              baseUrl={`/genres/${id}`}
             />
           </div>
         </div>

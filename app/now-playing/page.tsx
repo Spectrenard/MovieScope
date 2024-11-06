@@ -1,4 +1,4 @@
-import ScrollToTop from "@/components/ui/ScrollToTop";
+import ScrollToTop from "@/components/ScrollToTop";
 import MovieCard from "../components/MovieCard";
 import { movieService } from "../services/tmdb";
 
