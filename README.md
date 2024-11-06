@@ -1,6 +1,6 @@
 # 🍿 MovieScope
 
-MovieScope est une application web de découverte de films moderne, qui a pour but de faciliter aux utilisateurs à trouver leurs films à regarder, classés par les mieux notés, les films à l'affiche ou les films par genre, l'application web offre la possibilité d'ajouter des films en favori pour les stocker dans leurs listes.
+MovieScope est une application web moderne de découverte de films, conçue pour aider les utilisateurs à trouver facilement leur prochain film à regarder. Grâce à ses fonctionnalités de filtrage par catégories (mieux notés, à l'affiche, genres) et sa gestion de favoris, MovieScope offre une expérience utilisateur fluide et intuitive.
 
 
 ## Fonctionnalités principales
