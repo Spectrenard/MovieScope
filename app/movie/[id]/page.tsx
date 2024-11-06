@@ -10,15 +10,10 @@ function formatBudget(amount: number | null | undefined): string {
   return `${(amount / 1000000).toFixed(1)}M $`;
 }
 
-export default async function MovieDetail({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const [movie, credits] = await Promise.all([
-    movieService.getMovieDetails(params.id),
-    movieService.getMovieCredits(params.id),
-  ]);
+export default async function MovieDetail(props: any) {
+  const id = props.params.id;
+  const movie = await movieService.getMovieDetails(id);
+  const credits = await movieService.getMovieCredits(id);
 
   return (
     <main className="min-h-screen bg-[#121212]">
