@@ -60,7 +60,7 @@ export default async function GenresPage() {
                   className="bg-black/20
                    backdrop-blur-lg rounded-lg md:rounded-xl p-4 sm:p-6 md:p-8 
                   transition-all duration-300 ease-out
-                  group-hover:bg-gradient-to-br from-white/[0.07] to-white/[0.03]
+                  group-hover:bg-black/10
                   group-hover:shadow-lg group-hover:shadow-white/5
                   border border-transparent group-hover:border-white/10"
                 >

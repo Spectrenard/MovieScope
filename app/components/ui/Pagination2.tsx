@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 interface PaginationProps {
@@ -31,6 +33,7 @@ export function Pagination2({
         <Link
           key={page}
           href={`${baseUrl}?page=${page}`}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className={`px-4 py-2 rounded ${
             currentPage === page
               ? "bg-red-700 text-white"

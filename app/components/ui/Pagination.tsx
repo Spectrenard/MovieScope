@@ -17,6 +17,7 @@ export default function Pagination({
         <Link
           key={page}
           href={`/top-rated?page=${page}`}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className={`px-4 py-2 rounded ${
             currentPage === page
               ? "bg-red-600 text-white"
