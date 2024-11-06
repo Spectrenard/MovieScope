@@ -9,6 +9,7 @@ import {
   BiCategory,
   BiMenu,
   BiX,
+  BiHeart,
 } from "react-icons/bi";
 import { useState, useEffect } from "react";
 
@@ -50,6 +51,9 @@ export default function Navbar() {
             </NavLink>
             <NavLink href="/genres" icon={<BiCategory size={20} />}>
               Genres
+            </NavLink>
+            <NavLink href="/my-list" icon={<BiHeart size={20} />}>
+              Ma liste
             </NavLink>
           </div>
 
@@ -106,6 +110,13 @@ export default function Navbar() {
               setIsMenuOpen={setIsMenuOpen}
             >
               Genres
+            </MobileNavLink>
+            <MobileNavLink
+              href="/my-list"
+              icon={<BiHeart size={22} />}
+              setIsMenuOpen={setIsMenuOpen}
+            >
+              Ma Liste
             </MobileNavLink>
           </div>
 

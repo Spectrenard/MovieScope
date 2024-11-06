@@ -34,6 +34,24 @@ export async function fetchFromTMDB(endpoint: string) {
   }
 }
 
+// Création des query keys pour une meilleure organisation
+export const queryKeys = {
+  trending: ["trending"],
+  nowPlaying: ["nowPlaying"],
+  upcoming: ["upcoming"],
+  topRated: (page: number) => ["topRated", page],
+  movieDetails: (id: string) => ["movie", id],
+  search: (query: string) => ["search", query],
+  credits: (id: string) => ["credits", id],
+  genres: ["genres"],
+  moviesByGenre: (genreId: string, page: number) => [
+    "moviesByGenre",
+    genreId,
+    page,
+  ],
+};
+
+// Le service reste le même mais sera utilisé dans les hooks
 export const movieService = {
   getTrending: () => fetchFromTMDB("/trending/movie/week"),
   getNowPlaying: () => fetchFromTMDB("/movie/now_playing"),

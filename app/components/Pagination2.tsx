@@ -27,15 +27,6 @@ export function Pagination2({
 
   return (
     <div className="flex gap-2">
-      {currentPage > 1 && (
-        <Link
-          href={`${baseUrl}?page=${currentPage - 1}`}
-          className="px-4 py-2 bg-red-700 text-white rounded hover:bg-red-600"
-        >
-          Précédent
-        </Link>
-      )}
-
       {pages.map((page) => (
         <Link
           key={page}
@@ -49,15 +40,6 @@ export function Pagination2({
           {page}
         </Link>
       ))}
-
-      {currentPage < totalPages && (
-        <Link
-          href={`${baseUrl}?page=${currentPage + 1}`}
-          className="px-4 py-2 bg-red-700 text-white rounded hover:bg-red-600"
-        >
-          Suivant
-        </Link>
-      )}
     </div>
   );
 }
