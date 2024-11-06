@@ -73,4 +73,5 @@ export const movieService = {
     ).then((res) => res.json());
     return genres.genres.find((genre: any) => genre.id.toString() === id);
   },
+  getMovieVideos: (id: string) => fetchFromTMDB(`/movie/${id}/videos`),
 };

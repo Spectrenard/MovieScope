@@ -16,7 +16,7 @@ export default function Logo() {
   return (
     <div className="flex items-center gap-3 select-none">
       <div className="relative">
-        <PiPopcornBold className="w-6 md:w-8 h-9 text-red-600 drop-shadow-[0_0_8px_rgba(220,38,38,0.3)]" />
+        <PiPopcornBold className="w-6 md:w-8 h-9 text-red-500/85 drop-shadow-[0_0_8px_rgba(220,38,38,0.3)]" />
         <div className="absolute inset-0 bg-red-600/10 blur-2xl rounded-full animate-pulse" />
       </div>
 
@@ -39,7 +39,7 @@ export default function Logo() {
         </span>
 
         <span
-          className={`ml-2 text-[8px] ${spaceGrotesk.className} font-bold px-1.5 py-0.5 rounded-full 
+          className={`ml-2 text-[10px] ${spaceGrotesk.className} font-bold px-2 py-0.5 rounded-full 
           bg-gradient-to-r from-red-950/60 to-red-900/40
           text-red-400 border border-red-800/30 
           hover:from-red-900/60 hover:to-red-800/40 hover:text-red-300

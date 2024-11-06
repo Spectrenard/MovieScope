@@ -1,6 +1,7 @@
 import { movieService } from "../../../app/services/tmdb";
 import Image from "next/image";
 import { FiClock, FiCalendar, FiDollarSign, FiGlobe } from "react-icons/fi";
+import { BiPlay } from "react-icons/bi";
 
 function formatBudget(amount: number | null | undefined): string {
   if (!amount) return "Non défini";
@@ -14,6 +15,14 @@ export default async function MovieDetail(props: any) {
   const id = props.params.id;
   const movie = await movieService.getMovieDetails(id);
   const credits = await movieService.getMovieCredits(id);
+  const videos = await movieService.getMovieVideos(id);
+
+  // Filtrer pour obtenir les bandes-annonces en français ou en anglais
+  const trailers = videos.results?.filter(
+    (video: any) =>
+      (video.type === "Trailer" || video.type === "Teaser") &&
+      (video.iso_639_1 === "fr" || video.iso_639_1 === "en")
+  );
 
   return (
     <main className="min-h-screen bg-[#121212]">
@@ -128,6 +137,40 @@ export default async function MovieDetail(props: any) {
                 {movie.overview || "Aucun synopsis disponible."}
               </p>
             </div>
+
+            {/* Bandes-annonces */}
+            {trailers && trailers.length > 0 && (
+              <div className="mb-12">
+                <h2 className="text-2xl font-semibold mb-6">Bandes-annonces</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {trailers.slice(0, 2).map((trailer: any) => (
+                    <div
+                      key={trailer.id}
+                      className="bg-[#1a1a1a] rounded-xl overflow-hidden"
+                    >
+                      <div className="relative aspect-video">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${trailer.key}`}
+                          title={trailer.name}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="absolute inset-0 w-full h-full"
+                        />
+                      </div>
+                      <div className="p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <BiPlay className="text-red-500 text-xl" />
+                          <span className="text-white/90 font-medium">
+                            {trailer.type}
+                          </span>
+                        </div>
+                        <p className="text-sm text-white/60">{trailer.name}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Distribution */}
             <div className="py-9">
