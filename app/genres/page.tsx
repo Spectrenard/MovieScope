@@ -57,12 +57,12 @@ export default async function GenresPage() {
                 className="group"
               >
                 <div
-                  className="bg-black/20
-                   backdrop-blur-lg rounded-lg md:rounded-xl p-4 sm:p-6 md:p-8 
-                  transition-all duration-300 ease-out
-                  group-hover:bg-black/10
-                  group-hover:shadow-lg group-hover:shadow-white/5
-                  border border-transparent group-hover:border-white/10"
+                  className="bg-black/20 bg-gradient-to-br from-black/05 to-black/10
+                    backdrop-blur-lg rounded-lg md:rounded-xl p-4 sm:p-6 md:p-8 
+                    transition-all duration-300 ease-out
+                  
+                    group-hover:shadow-lg group-hover:shadow-white/5
+                    border border-transparent group-hover:border-white/10"
                 >
                   <div className="flex items-center gap-3 sm:gap-4">
                     {/* Icône */}
