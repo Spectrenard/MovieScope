@@ -11,7 +11,7 @@ export default async function GenreMoviesPage({
   searchParams,
 }: {
   params: { id: string };
-  searchParams: SearchParams;
+  searchParams?: { page?: string };
 }) {
   const currentPage = Number(searchParams?.page) || 1;
   const { id } = params;
