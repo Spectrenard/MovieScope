@@ -7,20 +7,20 @@ interface PageProps {
   params: {
     id: string;
   };
-  searchParams: {
+  searchParams?: {
     page?: string;
   };
 }
 
 export default async function GenreMoviesPage({
-  params: { id },
+  params,
   searchParams,
 }: PageProps) {
   const currentPage = Number(searchParams?.page) || 1;
-  const genreId = id; // Utiliser directement l'id depuis la déstructuration
+  const { id } = params;
 
-  const movies = await movieService.getMoviesByGenre(genreId, currentPage);
-  const genre = await movieService.getGenreById(genreId);
+  const movies = await movieService.getMoviesByGenre(id, currentPage);
+  const genre = await movieService.getGenreById(id);
 
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
