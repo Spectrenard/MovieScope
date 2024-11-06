@@ -1,27 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { RiMovie2Line } from "react-icons/ri";
 import { PiPopcornBold } from "react-icons/pi";
 
 export default function Logo() {
   return (
     <div className="flex items-center gap-2.5 select-none">
-      <motion.div
-        className="relative"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
+      <div className="relative">
         <PiPopcornBold className="w-8 h-8 text-white" />
         <div className="absolute inset-0 bg-amber-100/30 blur-xl rounded-full animate-pulse" />
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="flex items-baseline"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+      <div className="flex items-baseline">
         <span className="text-3xl font-black leading-none tracking-tight">
           <span className="bg-gradient-to-r from-red-500 via-red-400 to-white bg-clip-text text-transparent">
             Movie
@@ -40,7 +29,7 @@ export default function Logo() {
         >
           beta
         </span>
-      </motion.div>
+      </div>
     </div>
   );
 }

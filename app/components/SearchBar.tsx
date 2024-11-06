@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { BiSearch } from "react-icons/bi";
 import Image from "next/image";
 import Link from "next/link";
 import type { Movie } from "@/types/movie";

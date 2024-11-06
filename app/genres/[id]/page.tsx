@@ -1,7 +1,7 @@
 import { movieService } from "../../services/tmdb";
 import MovieCard from "../../components/MovieCard";
 import { Movie } from "../../types/movie";
-import { Pagination2 } from "@/components/Pagination2";
+import { Pagination2 } from "@/components/ui/Pagination2";
 
 async function getAllMoviesForGenre(genreId: string, page = 1) {
   const response = await movieService.getMoviesByGenre(genreId, page);

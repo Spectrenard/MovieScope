@@ -1,8 +1,8 @@
 import { movieService } from "../services/tmdb";
 import MovieCard from "../components/MovieCard";
-import ScrollToTop from "@/components/ScrollToTop";
-import Pagination from "@/components/Pagination";
 import { Movie } from "../types/movie";
+import Pagination from "@/components/ui/Pagination";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 export default async function TopRated({
   searchParams,

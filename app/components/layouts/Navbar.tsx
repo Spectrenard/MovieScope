@@ -3,7 +3,6 @@ import Link from "next/link";
 import Logo from "../Logo";
 import SearchBar from "../SearchBar";
 import {
-  BiMovie,
   BiTime,
   BiStar,
   BiCategory,

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { PiPopcornBold } from "react-icons/pi";
 import { motion } from "framer-motion";
 import { BiTime, BiStar, BiCategory } from "react-icons/bi";
-import { FiGithub, FiTwitter, FiLinkedin } from "react-icons/fi";
 
 export default function Footer() {
   return (

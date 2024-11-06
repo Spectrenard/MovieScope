@@ -1,7 +1,6 @@
-import ScrollToTop from "@/components/ScrollToTop";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 import MovieCard from "../components/MovieCard";
 import { movieService } from "../services/tmdb";
-import { Movie } from "../types/movie";
 
 export const revalidate = 3600;
 
