@@ -9,13 +9,15 @@ type Props = {
   searchParams?: { page?: string };
 };
 
-type PageProps = Props & {
-  params: Promise<any>;
+type PageProps = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ page?: string }>;
 };
 
 export default async function GenreMoviesPage(props: PageProps) {
-  const currentPage = Number(props.searchParams?.page) || 1;
   const { id } = await props.params;
+  const searchParams = await props.searchParams;
+  const currentPage = Number(searchParams?.page) || 1;
 
   const movies = await movieService.getMoviesByGenre(id, currentPage);
   const genre = await movieService.getGenreById(id);
