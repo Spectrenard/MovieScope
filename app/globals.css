@@ -13,6 +13,13 @@
 body {
   background-color: var(--background);
   color: var(--text-primary);
+  background-color: rgb(0, 1, 2);
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+html {
+  background-color: rgb(0, 1, 2);
 }
 
 /* Animation smooth pour les hover */
