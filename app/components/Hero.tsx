@@ -10,8 +10,14 @@ import { BsPlayCircleFill } from "react-icons/bs";
 export default function Hero({ movies }: { movies: Movie[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    // Ajouter un petit délai pour l'animation initiale
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+
     // Fonction pour obtenir un index aléatoire
     const getRandomIndex = () => Math.floor(Math.random() * movies.length);
 
@@ -39,14 +45,26 @@ export default function Hero({ movies }: { movies: Movie[] }) {
           src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
           alt="Film backdrop"
           fill
-          className={`object-cover transition-opacity duration-1000 ${
-            isTransitioning ? "opacity-0" : "opacity-90"
+          className={`object-cover transition-all duration-1000 ${
+            isTransitioning
+              ? "opacity-0"
+              : isLoaded
+              ? "opacity-90"
+              : "opacity-0"
           } scale-105`}
           priority
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent md:via-[#0A0A0A]/70" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/60" />
+        <div
+          className={`absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent md:via-[#0A0A0A]/70 transition-opacity duration-1000 ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
+        <div
+          className={`absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/60 transition-opacity duration-1000 ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -56,25 +74,45 @@ export default function Hero({ movies }: { movies: Movie[] }) {
           transition={{ duration: 0.8 }}
           className="max-w-4xl"
         >
-          <div className="mb-4 md:mb-6 flex items-center gap-2 md:gap-3">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-4 md:mb-6 flex items-center gap-2 md:gap-3"
+          >
             <div className="h-[2px] w-8 md:w-12 bg-gradient-to-r from-red-700 via-red-500 to-white" />
             <span className="text-red-500 font-medium tracking-wider text-xs md:text-sm">
               PLUS JAMAIS À COURT D'IDÉES
             </span>
-          </div>
+          </motion.div>
 
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black mb-4 md:mb-8 leading-tight md:leading-none tracking-tight">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-3xl sm:text-5xl md:text-7xl font-black mb-4 md:mb-8 leading-tight md:leading-none tracking-tight"
+          >
             <span className="bg-gradient-to-r from-white via-white to-white/70 text-transparent bg-clip-text">
               Le film parfait pour votre soirée en quelques clics
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-base md:text-xl text-gray-300/90 max-w-2xl mb-8 md:mb-12 leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="text-base md:text-xl text-gray-300/90 max-w-2xl mb-8 md:mb-12 leading-relaxed"
+          >
             Action, comédie, drame ou science-fiction ? Découvrez des films qui
             correspondent à vos envies du moment.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 items-stretch sm:items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4 md:gap-6 items-stretch sm:items-center"
+          >
             <Link href="/genres" className="flex-1 sm:flex-initial">
               <motion.button
                 whileHover={{ scale: 1.02 }}
@@ -99,7 +137,7 @@ export default function Hero({ movies }: { movies: Movie[] }) {
                 Films les mieux notés
               </motion.button>
             </Link>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

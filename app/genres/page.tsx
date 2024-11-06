@@ -57,7 +57,8 @@ export default async function GenresPage() {
                 className="group"
               >
                 <div
-                  className="bg-white/[0.03] backdrop-blur-lg rounded-lg md:rounded-xl p-4 sm:p-6 md:p-8 
+                  className="bg-black/20
+                   backdrop-blur-lg rounded-lg md:rounded-xl p-4 sm:p-6 md:p-8 
                   transition-all duration-300 ease-out
                   group-hover:bg-gradient-to-br from-white/[0.07] to-white/[0.03]
                   group-hover:shadow-lg group-hover:shadow-white/5
