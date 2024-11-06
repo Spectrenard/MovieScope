@@ -28,7 +28,7 @@ MovieScope est une application web moderne de découverte de films, conçue pour
 
 1. Clonez le dépôt
 2. Installez les dépendances : `npm install`
-3. Créez un fichier `.env` à la racine du projet
+3. Créez un fichier `.env` à la racine du projet et ajouter votre clé API TMDB `NEXT_PUBLIC_TMDB_API_KEY=VOTRE_CLE_API`
 4. Démarrez le serveur de développement : `npm run dev`
 5. Ouvrez votre navigateur et rendez-vous sur http://localhost:3000 pour accéder à MovieScope.
 
