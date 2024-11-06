@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍿 MovieScope
 
-## Getting Started
+MovieScope est une application web moderne de découverte de films, conçue pour aider les utilisateurs à trouver facilement leur prochain film à regarder. Grâce à ses fonctionnalités de filtrage par catégories (mieux notés, à l'affiche, genres) et sa gestion de favoris, MovieScope offre une expérience utilisateur fluide et intuitive.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Fonctionnalités principales
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🎯 Interface utilisateur moderne et responsive : Expérience immersive optimisée pour tous les appareils
+- 🔍 Recherche de films en temps réel : Trouvez rapidement des films grâce à une barre de recherche interactive
+- 🎭 Navigation par genres : Parcourez les films en fonction de genres spécifiques
+- ⭐ Films les mieux notés : Découvrez les films les plus appréciés
+- 🎬 Films actuellement à l'affiche : Accédez facilement aux sorties les plus récentes
+- 💖 Liste de favoris personnalisée : Sauvegardez vos films préférés pour un accès rapide
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![Capture d’écran 2024-11-06 à 19 38 16](https://github.com/user-attachments/assets/e507629e-9397-4a53-a2b5-f22e93255b64)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies utilisées
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next.js 14 : Framework React pour une navigation rapide et optimisée
+- TypeScript : Typage statique pour un code plus robuste et plus facile à maintenir
+- Tailwind CSS : Framework CSS pour un design moderne et réactif
+- Framer Motion : Bibliothèque d'animations pour une interface dynamique
+- API TMDB : Fournit des informations de films détaillées pour enrichir l'application
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Installation
 
-## Deploy on Vercel
+1. Clonez le dépôt
+2. Installez les dépendances : `npm install`
+3. Créez un fichier `.env` à la racine du projet et ajouter votre clé API TMDB `NEXT_PUBLIC_TMDB_API_KEY=VOTRE_CLE_API`
+4. Démarrez le serveur de développement : `npm run dev`
+5. Ouvrez votre navigateur et rendez-vous sur http://localhost:3000 pour accéder à MovieScope.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
