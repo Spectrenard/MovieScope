@@ -1,5 +1,6 @@
 import { movieService } from "../services/tmdb";
 import MovieCard from "../components/MovieCard";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default async function TopRated() {
   const pages = await Promise.all([
@@ -46,6 +47,7 @@ export default async function TopRated() {
           </div>
         </div>
       </div>
+      <ScrollToTop />
     </main>
   );
 }

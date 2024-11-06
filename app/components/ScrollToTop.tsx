@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BiArrowToTop } from "react-icons/bi";
+import { BiUpArrowAlt } from "react-icons/bi"; // Changement de l'icône ici
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ScrollToTop() {
@@ -39,7 +39,7 @@ export default function ScrollToTop() {
                    hover:bg-red-700 transition-colors duration-300"
           aria-label="Retour en haut"
         >
-          <BiArrowToTop className="w-6 h-6" />
+          <BiUpArrowAlt className="w-6 h-6" />
         </motion.button>
       )}
     </AnimatePresence>

@@ -1,3 +1,4 @@
+import ScrollToTop from "@/components/ScrollToTop";
 import MovieCard from "../components/MovieCard";
 import { movieService } from "../services/tmdb";
 import { Movie } from "../types/movie";
@@ -54,6 +55,7 @@ export default async function NowPlaying() {
           </div>
         </div>
       </div>
+      <ScrollToTop />
     </main>
   );
 }
