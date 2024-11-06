@@ -4,17 +4,12 @@ import { Movie } from "../../types/movie";
 import { Pagination2 } from "@/components/ui/Pagination2";
 import { Metadata } from "next";
 
-interface PageParams {
-  id: string;
+interface Props {
+  params: { id: string };
+  searchParams?: { page?: string };
 }
 
-export default async function GenreMoviesPage({
-  params,
-  searchParams,
-}: {
-  params: PageParams;
-  searchParams: { [key: string]: string | undefined };
-}) {
+export default async function GenreMoviesPage({ params, searchParams }: Props) {
   const currentPage = Number(searchParams?.page) || 1;
   const { id } = params;
 
