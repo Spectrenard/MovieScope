@@ -3,19 +3,13 @@ import MovieCard from "../../components/MovieCard";
 import { Movie } from "../../types/movie";
 import { Pagination2 } from "@/components/ui/Pagination2";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-  searchParams?: {
-    page?: string;
-  };
-}
-
 export default async function GenreMoviesPage({
   params,
   searchParams,
-}: PageProps) {
+}: {
+  params: { id: string };
+  searchParams?: { page?: string };
+}) {
   const currentPage = Number(searchParams?.page) || 1;
   const { id } = params;
 
