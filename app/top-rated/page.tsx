@@ -1,17 +1,19 @@
 import { movieService } from "../services/tmdb";
 import MovieCard from "../components/MovieCard";
 import ScrollToTop from "@/components/ScrollToTop";
+import Pagination from "@/components/Pagination";
+import { Movie } from "../types/movie";
 
-export default async function TopRated() {
-  const pages = await Promise.all([
-    movieService.getTopRated(1),
-    movieService.getTopRated(2),
-    movieService.getTopRated(3),
-    movieService.getTopRated(4),
-    movieService.getTopRated(5),
-  ]);
+export default async function TopRated({
+  searchParams,
+}: {
+  searchParams: { page?: string };
+}) {
+  const currentPage = Number(searchParams.page) || 1;
+  const moviesPerPage = 20;
 
-  const allMovies = pages.flatMap((page) => page.results);
+  const page = await movieService.getTopRated(currentPage);
+  const totalPages = 5;
 
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
@@ -36,7 +38,7 @@ export default async function TopRated() {
 
           {/* Grille de films */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 px-2 sm:px-0">
-            {allMovies.map((movie) => (
+            {page.results.map((movie: Movie) => (
               <div
                 key={movie.id}
                 className="transform hover:scale-105 transition-transform duration-300"
@@ -44,6 +46,11 @@ export default async function TopRated() {
                 <MovieCard movie={movie} />
               </div>
             ))}
+          </div>
+
+          {/* Pagination */}
+          <div className="mt-8 flex justify-center">
+            <Pagination currentPage={currentPage} totalPages={totalPages} />
           </div>
         </div>
       </div>
