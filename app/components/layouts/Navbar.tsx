@@ -30,7 +30,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="hover:scale-105 transition-transform duration-300 ease-out"
+            className="hover:scale-[1.02] transition-transform duration-300 ease-out"
           >
             <Logo />
           </Link>
@@ -139,9 +139,9 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="group flex items-center gap-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200"
+      className="group flex items-center gap-2 text-sm font-medium text-white/70 rounded-lg px-3 py-2 -mx-3 focus:bg-white/5 focus:text-white transition-all duration-200 relative focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
     >
-      <span className="text-white/60 group-hover:text-white transition-colors duration-200">
+      <span className="text-white/60 group-focus-within:text-white transition-colors duration-200">
         {icon}
       </span>
       <span>{children}</span>
@@ -164,9 +164,9 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={() => setIsMenuOpen(false)}
-      className="flex items-center gap-3 px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 active:bg-white/10 transition-all duration-200"
+      className="flex items-center gap-3 px-4 py-3 text-white/80 focus:text-white active:bg-white/10 transition-all duration-200 focus:outline-none focus-visible:bg-white/5 focus-visible:pl-6"
     >
-      <span className="text-white/60">{icon}</span>
+      <span className="text-white/60 group-focus:text-white">{icon}</span>
       <span className="font-medium">{children}</span>
     </Link>
   );
