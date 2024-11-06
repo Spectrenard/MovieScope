@@ -1,29 +1,27 @@
 import { movieService } from "../../services/tmdb";
 import MovieCard from "../../components/MovieCard";
 import { Movie } from "../../types/movie";
+import { Pagination2 } from "@/components/Pagination2";
 
-async function getAllMoviesForGenre(genreId: string, maxPages = 5) {
-  let allMovies: Movie[] = [];
-
-  const pagePromises = Array.from({ length: maxPages }, (_, i) =>
-    movieService.getMoviesByGenre(genreId, i + 1)
-  );
-
-  const results = await Promise.all(pagePromises);
-  results.forEach((response) => {
-    allMovies = [...allMovies, ...response.results];
-  });
-
-  return allMovies.sort((a, b) => b.vote_average - a.vote_average);
+async function getAllMoviesForGenre(genreId: string, page = 1) {
+  const response = await movieService.getMoviesByGenre(genreId, page);
+  return {
+    movies: response.results,
+    totalPages: response.total_pages,
+  };
 }
 
 export default async function GenreMoviesPage({
   params,
+  searchParams,
 }: {
   params: { id: string };
+  searchParams: { page?: string };
 }) {
-  const [movies, { genres }] = await Promise.all([
-    getAllMoviesForGenre(params.id),
+  const currentPage = Number(searchParams.page) || 1;
+
+  const [{ movies, totalPages }, { genres }] = await Promise.all([
+    getAllMoviesForGenre(params.id, currentPage),
     movieService.getGenres(),
   ]);
 
@@ -52,7 +50,7 @@ export default async function GenreMoviesPage({
 
           {/* Grille de films */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 px-2 sm:px-0">
-            {movies.map((movie) => (
+            {movies.map((movie: Movie) => (
               <div
                 key={movie.id}
                 className="transform hover:scale-105 transition-transform duration-300"
@@ -60,6 +58,15 @@ export default async function GenreMoviesPage({
                 <MovieCard movie={movie} />
               </div>
             ))}
+          </div>
+
+          {/* Pagination */}
+          <div className="mt-8 flex justify-center">
+            <Pagination2
+              currentPage={currentPage}
+              totalPages={Math.min(totalPages, 500)}
+              baseUrl={`/genres/${params.id}`}
+            />
           </div>
         </div>
       </div>
