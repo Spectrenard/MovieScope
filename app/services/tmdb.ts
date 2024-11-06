@@ -67,4 +67,10 @@ export const movieService = {
     fetchFromTMDB(
       `/discover/movie?with_genres=${genreId}&sort_by=vote_average.desc&vote_count.gte=100&page=${page}`
     ),
+  getGenreById: async (id: string) => {
+    const genres = await fetch(
+      `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`
+    ).then((res) => res.json());
+    return genres.genres.find((genre: any) => genre.id.toString() === id);
+  },
 };

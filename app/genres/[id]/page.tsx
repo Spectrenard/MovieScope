@@ -3,29 +3,25 @@ import MovieCard from "../../components/MovieCard";
 import { Movie } from "../../types/movie";
 import { Pagination2 } from "@/components/ui/Pagination2";
 
-async function getAllMoviesForGenre(genreId: string, page = 1) {
-  const response = await movieService.getMoviesByGenre(genreId, page);
-  return {
-    movies: response.results,
-    totalPages: response.total_pages,
+interface PageProps {
+  params: {
+    id: string;
+  };
+  searchParams: {
+    page?: string;
   };
 }
 
 export default async function GenreMoviesPage({
   params,
   searchParams,
-}: {
-  params: { id: string };
-  searchParams: { page?: string };
-}) {
+}: PageProps) {
   const currentPage = Number(searchParams.page) || 1;
+  const genreId = params.id;
 
-  const [{ movies, totalPages }, { genres }] = await Promise.all([
-    getAllMoviesForGenre(params.id, currentPage),
-    movieService.getGenres(),
-  ]);
-
-  const currentGenre = genres.find((g: any) => g.id.toString() === params.id);
+  // Récupérer les films du genre
+  const movies = await movieService.getMoviesByGenre(genreId, currentPage);
+  const genre = await movieService.getGenreById(genreId);
 
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
@@ -41,16 +37,16 @@ export default async function GenreMoviesPage({
               bg-gradient-to-r from-red-700 via-red-500 to-white"
             ></div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white pt-2">
-              Films {currentGenre?.name}
+              Films {genre?.name}
               <span className="block mt-2 text-xs sm:text-sm font-normal text-gray-400">
-                Les meilleurs films du genre {currentGenre?.name}
+                Les meilleurs films du genre {genre?.name}
               </span>
             </h1>
           </div>
 
           {/* Grille de films */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 px-2 sm:px-0">
-            {movies.map((movie: Movie) => (
+            {movies.results.map((movie: Movie) => (
               <div
                 key={movie.id}
                 className="transform hover:scale-105 transition-transform duration-300"
@@ -64,7 +60,7 @@ export default async function GenreMoviesPage({
           <div className="mt-8 flex justify-center">
             <Pagination2
               currentPage={currentPage}
-              totalPages={Math.min(totalPages, 500)}
+              totalPages={Math.min(movies.total_pages, 500)}
               baseUrl={`/genres/${params.id}`}
             />
           </div>
