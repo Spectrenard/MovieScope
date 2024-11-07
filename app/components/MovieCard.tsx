@@ -56,9 +56,11 @@ export default function MovieCard({ movie }: { movie: Movie }) {
             <Image
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              width={400}
+              height={600}
+              className="w-full"
+              quality={80}
+              loading="lazy"
             />
             {/* Overlay desktop */}
             <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-smooth flex-col justify-end p-4">
