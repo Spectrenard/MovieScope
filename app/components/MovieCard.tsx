@@ -3,52 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Movie } from "../types/movie";
-import { useState, useEffect } from "react";
-import { BiHeart, BiSolidHeart } from "react-icons/bi";
+import FavoriteButton from "./FavoriteButton";
 
 export default function MovieCard({ movie }: { movie: Movie }) {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-    setIsFavorite(favorites.some((fav: Movie) => fav.id === movie.id));
-  }, [movie.id]);
-
-  const toggleFavorite = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-
-    if (isFavorite) {
-      const newFavorites = favorites.filter(
-        (fav: Movie) => fav.id !== movie.id
-      );
-      localStorage.setItem("favorites", JSON.stringify(newFavorites));
-    } else {
-      favorites.push(movie);
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-    }
-
-    setIsFavorite(!isFavorite);
-  };
-
   return (
     <Link href={`/movie/${movie.id}`}>
       <div className="relative group transition-smooth">
-        {/* Bouton Favoris */}
-        <button
-          onClick={toggleFavorite}
-          className="absolute top-2 right-2 z-20 p-2 rounded-full bg-black/50 
-          hover:bg-black/70 transition-colors duration-200"
-        >
-          {isFavorite ? (
-            <BiSolidHeart className="w-5 h-5 text-red-500" />
-          ) : (
-            <BiHeart className="w-5 h-5 text-white" />
-          )}
-        </button>
-
         {/* Container principal */}
         <div className="bg-[#1e1e1e] rounded-xl overflow-hidden transition-smooth">
           {/* Image */}
@@ -62,6 +22,10 @@ export default function MovieCard({ movie }: { movie: Movie }) {
               quality={80}
               loading="lazy"
             />
+            {/* Bouton Favoris à l'intérieur de la carte */}
+            <div className="absolute top-2 right-2 z-10">
+              <FavoriteButton movie={movie} />
+            </div>
             {/* Overlay desktop */}
             <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-smooth flex-col justify-end p-4">
               <h2 className="text-lg font-medium text-white mb-2">

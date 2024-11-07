@@ -4,6 +4,7 @@ import { FiClock, FiCalendar, FiDollarSign, FiGlobe } from "react-icons/fi";
 import { BiPlay } from "react-icons/bi";
 import Link from "next/link";
 import MovieCard from "../../components/MovieCard";
+import FavoriteButton from "../../components/FavoriteButton";
 
 function formatBudget(amount: number | null | undefined): string {
   if (!amount) return "Non défini";
@@ -67,7 +68,7 @@ export default async function MovieDetail(props: any) {
       return scoreB - scoreA;
     })
     .filter((movie) => movie.genreMatchCount > 0) // Garder uniquement les films avec au moins un genre en commun
-    .slice(0, 10); // Garder les 10 meilleurs
+    .slice(0, 5); // Garder les 5 meilleurs
 
   const hasRecommendations = allSuggestions.length > 0;
 
@@ -109,6 +110,9 @@ export default async function MovieDetail(props: any) {
                 className="w-full"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute top-4 right-4 z-10">
+                <FavoriteButton movie={movie} />
+              </div>
             </div>
 
             {/* Infos rapides */}
@@ -269,9 +273,11 @@ export default async function MovieDetail(props: any) {
       {hasRecommendations && (
         <div className="container mx-auto px-4 py-12">
           <h2 className="text-2xl font-semibold mb-6">Films recommandés</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="flex gap-4 overflow-x-auto whitespace-nowrap">
             {allSuggestions.map((movie: any) => (
-              <MovieCard key={movie.id} movie={movie} />
+              <div className="inline-block min-w-[150px]" key={movie.id}>
+                <MovieCard movie={movie} />
+              </div>
             ))}
           </div>
         </div>
