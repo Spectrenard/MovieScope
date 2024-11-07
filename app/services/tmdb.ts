@@ -49,6 +49,7 @@ export const queryKeys = {
     genreId,
     page,
   ],
+  recommendations: (id: string) => ["recommendations", id],
 };
 
 // Le service reste le même mais sera utilisé dans les hooks
@@ -74,4 +75,9 @@ export const movieService = {
     return genres.genres.find((genre: any) => genre.id.toString() === id);
   },
   getMovieVideos: (id: string) => fetchFromTMDB(`/movie/${id}/videos`),
+  getMovieRecommendations: (id: string) => {
+    console.log(`Fetching recommendations for movie ${id}`);
+    return fetchFromTMDB(`/movie/${id}/recommendations`);
+  },
+  // Dans votre classe movieService
 };

@@ -2,6 +2,7 @@ import { movieService } from "../../../app/services/tmdb";
 import Image from "next/image";
 import { FiClock, FiCalendar, FiDollarSign, FiGlobe } from "react-icons/fi";
 import { BiPlay } from "react-icons/bi";
+import Link from "next/link";
 
 function formatBudget(amount: number | null | undefined): string {
   if (!amount) return "Non défini";
@@ -16,6 +17,14 @@ export default async function MovieDetail(props: any) {
   const movie = await movieService.getMovieDetails(id);
   const credits = await movieService.getMovieCredits(id);
   const videos = await movieService.getMovieVideos(id);
+  const recommendations = await movieService.getMovieRecommendations(id);
+
+  // Ajout de logs pour déboguer
+  console.log("Recommendations:", recommendations);
+
+  // Vérification plus stricte des données
+  const hasRecommendations =
+    recommendations?.results && recommendations.results.length > 0;
 
   // Filtrer pour obtenir les bandes-annonces en français ou en anglais
   const trailers = videos.results?.filter(
@@ -207,6 +216,47 @@ export default async function MovieDetail(props: any) {
           </div>
         </div>
       </div>
+
+      {/* Section des recommandations avec vérification plus stricte */}
+      {hasRecommendations && (
+        <div className="container mx-auto px-4 py-12">
+          <h2 className="text-2xl font-semibold mb-6">Films recommandés</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {recommendations.results.slice(0, 5).map((movie: any) => (
+              <Link
+                href={`/movie/${movie.id}`}
+                key={movie.id}
+                className="group"
+              >
+                {movie.poster_path ? (
+                  <div className="relative rounded-lg overflow-hidden">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                      alt={movie.title}
+                      width={300}
+                      height={450}
+                      className="w-full transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                ) : (
+                  <div className="aspect-[2/3] bg-[#2a2a2a] rounded-lg flex items-center justify-center">
+                    <span className="text-white/40">No image</span>
+                  </div>
+                )}
+                <h3 className="mt-2 text-sm font-medium text-white/90">
+                  {movie.title}
+                </h3>
+                <p className="text-sm text-white/60">
+                  {movie.release_date
+                    ? new Date(movie.release_date).getFullYear()
+                    : "Date inconnue"}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </main>
   );
 }
