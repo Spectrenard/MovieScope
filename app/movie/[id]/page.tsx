@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FiClock, FiCalendar, FiDollarSign, FiGlobe } from "react-icons/fi";
 import { BiPlay } from "react-icons/bi";
 import Link from "next/link";
+import MovieCard from "../../components/MovieCard";
 
 function formatBudget(amount: number | null | undefined): string {
   if (!amount) return "Non défini";
@@ -14,9 +15,12 @@ function formatBudget(amount: number | null | undefined): string {
 
 export default async function MovieDetail(props: any) {
   const id = props.params.id;
-  const movie = await movieService.getMovieDetails(id);
-  const credits = await movieService.getMovieCredits(id);
-  const videos = await movieService.getMovieVideos(id);
+  const [movie, credits, videos, watchProviders] = await Promise.all([
+    movieService.getMovieDetails(id),
+    movieService.getMovieCredits(id),
+    movieService.getMovieVideos(id),
+    movieService.getWatchProviders(id),
+  ]);
 
   // Récupérer les genres du film actuel
   const movieGenreIds = movie.genres?.map((genre: any) => genre.id) || [];
@@ -43,6 +47,12 @@ export default async function MovieDetail(props: any) {
       genreMatchCount:
         movie.genre_ids?.filter((id: number) => movieGenreIds.includes(id))
           .length || 0,
+      // S'assurer que tous les champs nécessaires sont présents
+      poster_path: movie.poster_path || "",
+      title: movie.title || "",
+      vote_average: movie.vote_average || 0,
+      release_date: movie.release_date || "",
+      id: movie.id,
     }))
     .sort((a, b) => {
       // Priorité au nombre de genres en commun
@@ -57,7 +67,7 @@ export default async function MovieDetail(props: any) {
       return scoreB - scoreA;
     })
     .filter((movie) => movie.genreMatchCount > 0) // Garder uniquement les films avec au moins un genre en commun
-    .slice(0, 10); // Garder les 10 meilleurs
+    .slice(0, 5); // Garder les 5 meilleurs (au lieu de 10)
 
   const hasRecommendations = allSuggestions.length > 0;
 
@@ -67,6 +77,9 @@ export default async function MovieDetail(props: any) {
       (video.type === "Trailer" || video.type === "Teaser") &&
       (video.iso_639_1 === "fr" || video.iso_639_1 === "en")
   );
+
+  // Récupérer les providers pour la France
+  const providers = watchProviders.results?.FR;
 
   return (
     <main className="min-h-screen bg-[#121212]">
@@ -257,39 +270,115 @@ export default async function MovieDetail(props: any) {
         <div className="container mx-auto px-4 py-12">
           <h2 className="text-2xl font-semibold mb-6">Films recommandés</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {allSuggestions.slice(0, 5).map((movie: any) => (
-              <Link
-                href={`/movie/${movie.id}`}
-                key={movie.id}
-                className="group"
-              >
-                {movie.poster_path ? (
-                  <div className="relative rounded-lg overflow-hidden">
-                    <Image
-                      src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                      alt={movie.title}
-                      width={300}
-                      height={450}
-                      className="w-full transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                ) : (
-                  <div className="aspect-[2/3] bg-[#2a2a2a] rounded-lg flex items-center justify-center">
-                    <span className="text-white/40">No image</span>
-                  </div>
-                )}
-                <h3 className="mt-2 text-sm font-medium text-white/90">
-                  {movie.title}
-                </h3>
-                <p className="text-sm text-white/60">
-                  {movie.release_date
-                    ? new Date(movie.release_date).getFullYear()
-                    : "Date inconnue"}
-                </p>
-              </Link>
+            {allSuggestions.map((movie: any) => (
+              <MovieCard key={movie.id} movie={movie} />
             ))}
           </div>
+        </div>
+      )}
+
+      {/* Section Où regarder */}
+      {providers && (
+        <div className="mt-8 bg-[#1a1a1a] rounded-xl p-6 space-y-4">
+          <h3 className="text-lg font-medium mb-3 text-white/90">
+            Disponible sur
+          </h3>
+
+          {/* Streaming par abonnement */}
+          {providers.flatrate && providers.flatrate.length > 0 && (
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-1 h-4 bg-indigo-500 rounded-full"></div>
+                <h4 className="text-sm font-medium text-white/90">
+                  Streaming par abonnement
+                </h4>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {providers.flatrate.map((provider: any) => (
+                  <div
+                    key={provider.provider_id}
+                    className="group flex items-center gap-2.5 bg-[#2a2a2a] hover:bg-[#333333] 
+                      rounded-lg p-2.5 transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="relative">
+                      <Image
+                        src={`https://image.tmdb.org/t/p/original${provider.logo_path}`}
+                        alt={provider.provider_name}
+                        width={32}
+                        height={32}
+                        className="rounded-md shadow-md group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <span className="text-sm font-medium text-white/80 group-hover:text-white">
+                      {provider.provider_name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Location à l'unité */}
+          {providers.rent && providers.rent.length > 0 && (
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-1 h-4 bg-amber-500 rounded-full"></div>
+                <h4 className="text-sm font-medium text-white/90">
+                  Location à l'unité
+                </h4>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {providers.rent.map((provider: any) => (
+                  <div
+                    key={provider.provider_id}
+                    className="group flex items-center gap-2.5 bg-[#2a2a2a] hover:bg-[#333333] 
+                      rounded-lg p-2.5 transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="relative">
+                      <Image
+                        src={`https://image.tmdb.org/t/p/original${provider.logo_path}`}
+                        alt={provider.provider_name}
+                        width={32}
+                        height={32}
+                        className="rounded-md shadow-md group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <span className="text-sm font-medium text-white/80 group-hover:text-white">
+                      {provider.provider_name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Lien JustWatch */}
+          {providers.link && (
+            <div className="pt-4 border-t border-white/10">
+              <a
+                href={providers.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-indigo-400 
+                  hover:text-indigo-300 transition-colors duration-300"
+              >
+                <span>Voir les prix et plus de détails sur JustWatch</span>
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </a>
+            </div>
+          )}
         </div>
       )}
     </main>

@@ -104,4 +104,7 @@ export const movieService = {
         })
     );
   },
+  getWatchProviders: (id: string) => {
+    return fetchFromTMDB(`/movie/${id}/watch/providers`);
+  },
 };
