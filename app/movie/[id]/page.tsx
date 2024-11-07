@@ -67,7 +67,7 @@ export default async function MovieDetail(props: any) {
       return scoreB - scoreA;
     })
     .filter((movie) => movie.genreMatchCount > 0) // Garder uniquement les films avec au moins un genre en commun
-    .slice(0, 5); // Garder les 5 meilleurs (au lieu de 10)
+    .slice(0, 10); // Garder les 10 meilleurs
 
   const hasRecommendations = allSuggestions.length > 0;
 
@@ -279,106 +279,108 @@ export default async function MovieDetail(props: any) {
 
       {/* Section Où regarder */}
       {providers && (
-        <div className="mt-8 bg-[#1a1a1a] rounded-xl p-6 space-y-4">
-          <h3 className="text-lg font-medium mb-3 text-white/90">
-            Disponible sur
-          </h3>
+        <div className="container mx-auto px-4 mt-8 pb-10">
+          <div className="bg-[#1a1a1a] rounded-xl p-6 space-y-4">
+            <h3 className="text-lg font-medium mb-3 text-white/90">
+              Disponible sur
+            </h3>
 
-          {/* Streaming par abonnement */}
-          {providers.flatrate && providers.flatrate.length > 0 && (
-            <div className="mb-6">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-1 h-4 bg-indigo-500 rounded-full"></div>
-                <h4 className="text-sm font-medium text-white/90">
-                  Streaming par abonnement
-                </h4>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {providers.flatrate.map((provider: any) => (
-                  <div
-                    key={provider.provider_id}
-                    className="group flex items-center gap-2.5 bg-[#2a2a2a] hover:bg-[#333333] 
-                      rounded-lg p-2.5 transition-all duration-300 cursor-pointer"
-                  >
-                    <div className="relative">
-                      <Image
-                        src={`https://image.tmdb.org/t/p/original${provider.logo_path}`}
-                        alt={provider.provider_name}
-                        width={32}
-                        height={32}
-                        className="rounded-md shadow-md group-hover:scale-105 transition-transform duration-300"
-                      />
+            {/* Streaming par abonnement */}
+            {providers.flatrate && providers.flatrate.length > 0 && (
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-1 h-4 bg-indigo-500 rounded-full"></div>
+                  <h4 className="text-sm font-medium text-white/90">
+                    Streaming par abonnement
+                  </h4>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  {providers.flatrate.map((provider: any) => (
+                    <div
+                      key={provider.provider_id}
+                      className="group flex items-center gap-2.5 bg-[#2a2a2a] hover:bg-[#333333] 
+                        rounded-lg p-2.5 transition-all duration-300 cursor-pointer"
+                    >
+                      <div className="relative">
+                        <Image
+                          src={`https://image.tmdb.org/t/p/original${provider.logo_path}`}
+                          alt={provider.provider_name}
+                          width={32}
+                          height={32}
+                          className="rounded-md shadow-md group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <span className="text-sm font-medium text-white/80 group-hover:text-white">
+                        {provider.provider_name}
+                      </span>
                     </div>
-                    <span className="text-sm font-medium text-white/80 group-hover:text-white">
-                      {provider.provider_name}
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Location à l'unité */}
-          {providers.rent && providers.rent.length > 0 && (
-            <div className="mb-6">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-1 h-4 bg-amber-500 rounded-full"></div>
-                <h4 className="text-sm font-medium text-white/90">
-                  Location à l'unité
-                </h4>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {providers.rent.map((provider: any) => (
-                  <div
-                    key={provider.provider_id}
-                    className="group flex items-center gap-2.5 bg-[#2a2a2a] hover:bg-[#333333] 
-                      rounded-lg p-2.5 transition-all duration-300 cursor-pointer"
-                  >
-                    <div className="relative">
-                      <Image
-                        src={`https://image.tmdb.org/t/p/original${provider.logo_path}`}
-                        alt={provider.provider_name}
-                        width={32}
-                        height={32}
-                        className="rounded-md shadow-md group-hover:scale-105 transition-transform duration-300"
-                      />
+            {/* Location à l'unité */}
+            {providers.rent && providers.rent.length > 0 && (
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-1 h-4 bg-amber-500 rounded-full"></div>
+                  <h4 className="text-sm font-medium text-white/90">
+                    Location à l'unité
+                  </h4>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  {providers.rent.map((provider: any) => (
+                    <div
+                      key={provider.provider_id}
+                      className="group flex items-center gap-2.5 bg-[#2a2a2a] hover:bg-[#333333] 
+                        rounded-lg p-2.5 transition-all duration-300 cursor-pointer"
+                    >
+                      <div className="relative">
+                        <Image
+                          src={`https://image.tmdb.org/t/p/original${provider.logo_path}`}
+                          alt={provider.provider_name}
+                          width={32}
+                          height={32}
+                          className="rounded-md shadow-md group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <span className="text-sm font-medium text-white/80 group-hover:text-white">
+                        {provider.provider_name}
+                      </span>
                     </div>
-                    <span className="text-sm font-medium text-white/80 group-hover:text-white">
-                      {provider.provider_name}
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Lien JustWatch */}
-          {providers.link && (
-            <div className="pt-4 border-t border-white/10">
-              <a
-                href={providers.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-indigo-400 
-                  hover:text-indigo-300 transition-colors duration-300"
-              >
-                <span>Voir les prix et plus de détails sur JustWatch</span>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            {/* Lien JustWatch */}
+            {providers.link && (
+              <div className="pt-4 border-t border-white/10">
+                <a
+                  href={providers.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-indigo-400 
+                    hover:text-indigo-300 transition-colors duration-300"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </a>
-            </div>
-          )}
+                  <span>Voir les prix et plus de détails sur JustWatch</span>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </a>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </main>
