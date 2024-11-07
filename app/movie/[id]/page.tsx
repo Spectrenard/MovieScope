@@ -17,14 +17,49 @@ export default async function MovieDetail(props: any) {
   const movie = await movieService.getMovieDetails(id);
   const credits = await movieService.getMovieCredits(id);
   const videos = await movieService.getMovieVideos(id);
-  const recommendations = await movieService.getMovieRecommendations(id);
 
-  // Ajout de logs pour déboguer
-  console.log("Recommendations:", recommendations);
+  // Récupérer les genres du film actuel
+  const movieGenreIds = movie.genres?.map((genre: any) => genre.id) || [];
 
-  // Vérification plus stricte des données
-  const hasRecommendations =
-    recommendations?.results && recommendations.results.length > 0;
+  // Récupérer les suggestions
+  const [recommendations, similarMovies] = await Promise.all([
+    movieService.getMovieRecommendations(id),
+    movieService.getSimilarMovies(id),
+  ]);
+
+  // Combiner et filtrer les résultats
+  const allSuggestions = [
+    ...(recommendations.results || []),
+    ...(similarMovies.results || []),
+  ]
+    .filter(
+      (movie, index, self) =>
+        // Dédupliquer
+        index === self.findIndex((m) => m.id === movie.id)
+    )
+    .map((movie) => ({
+      ...movie,
+      // Calculer le nombre de genres en commun
+      genreMatchCount:
+        movie.genre_ids?.filter((id: number) => movieGenreIds.includes(id))
+          .length || 0,
+    }))
+    .sort((a, b) => {
+      // Priorité au nombre de genres en commun
+      if (b.genreMatchCount !== a.genreMatchCount) {
+        return b.genreMatchCount - a.genreMatchCount;
+      }
+      // Ensuite par popularité et note
+      const scoreA =
+        a.vote_average * Math.log10(a.vote_count) + a.popularity / 100;
+      const scoreB =
+        b.vote_average * Math.log10(b.vote_count) + b.popularity / 100;
+      return scoreB - scoreA;
+    })
+    .filter((movie) => movie.genreMatchCount > 0) // Garder uniquement les films avec au moins un genre en commun
+    .slice(0, 10); // Garder les 10 meilleurs
+
+  const hasRecommendations = allSuggestions.length > 0;
 
   // Filtrer pour obtenir les bandes-annonces en français ou en anglais
   const trailers = videos.results?.filter(
@@ -222,7 +257,7 @@ export default async function MovieDetail(props: any) {
         <div className="container mx-auto px-4 py-12">
           <h2 className="text-2xl font-semibold mb-6">Films recommandés</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {recommendations.results.slice(0, 5).map((movie: any) => (
+            {allSuggestions.slice(0, 5).map((movie: any) => (
               <Link
                 href={`/movie/${movie.id}`}
                 key={movie.id}

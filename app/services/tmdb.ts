@@ -75,9 +75,33 @@ export const movieService = {
     return genres.genres.find((genre: any) => genre.id.toString() === id);
   },
   getMovieVideos: (id: string) => fetchFromTMDB(`/movie/${id}/videos`),
-  getMovieRecommendations: (id: string) => {
-    console.log(`Fetching recommendations for movie ${id}`);
-    return fetchFromTMDB(`/movie/${id}/recommendations`);
+  getSimilarMovies: async (id: string) => {
+    const movie = await fetchFromTMDB(`/movie/${id}`);
+    const genreIds = movie.genres?.map((g: any) => g.id).join(",");
+
+    return fetchFromTMDB(
+      `/discover/movie?` +
+        new URLSearchParams({
+          with_genres: genreIds,
+          sort_by: "popularity.desc",
+          "vote_count.gte": "100",
+          "vote_average.gte": "6.0",
+          with_original_language: "fr,en",
+          page: "1",
+          without_movies: id, // Exclure le film actuel
+        })
+    );
   },
-  // Dans votre classe movieService
+  getMovieRecommendations: (id: string) => {
+    return fetchFromTMDB(
+      `/movie/${id}/recommendations?` +
+        new URLSearchParams({
+          sort_by: "vote_average.desc",
+          "vote_count.gte": "100",
+          with_original_language: "fr,en",
+          "vote_average.gte": "6.0",
+          page: "1",
+        })
+    );
+  },
 };
