@@ -1,7 +1,7 @@
 import { movieService } from "./services/tmdb";
 import Hero from "./components/Hero";
 import MovieSection from "./components/MovieSection";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/features/ScrollToTop";
 
 async function Home() {
   const [trending, topRated] = await Promise.all([

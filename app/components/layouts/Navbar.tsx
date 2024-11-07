@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Logo from "../Logo";
-import SearchBar from "../SearchBar";
+import SearchBar from "../features/SearchBar";
 import {
   BiTime,
   BiStar,

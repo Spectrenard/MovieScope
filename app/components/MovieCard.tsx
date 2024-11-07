@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Movie } from "../types/movie";
-import FavoriteButton from "./FavoriteButton";
+import FavoriteButton from "./features/FavoriteButton";
 
 export default function MovieCard({ movie }: { movie: Movie }) {
   return (

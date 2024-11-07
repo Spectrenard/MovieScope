@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { BiHeart, BiSolidHeart } from "react-icons/bi";
-import { Movie } from "../types/movie";
+import { Movie } from "../../types/movie";
 
 interface FavoriteButtonProps {
   movie: Movie;
